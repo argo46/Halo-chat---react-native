@@ -1,8 +1,8 @@
 platform :ios, '9.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-target 'halochat' do
-  # Pods for halochat
+target 'HaloChat' do
+  # Pods for HaloChat
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
@@ -36,7 +36,7 @@ target 'halochat' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
-  target 'halochatTests' do
+  target 'HaloChatTests' do
     inherit! :search_paths
     # Pods for testing
   end
@@ -44,10 +44,10 @@ target 'halochat' do
   use_native_modules!
 end
 
-target 'halochat-tvOS' do
-  # Pods for halochat-tvOS
+target 'HaloChat-tvOS' do
+  # Pods for HaloChat-tvOS
 
-  target 'halochat-tvOSTests' do
+  target 'HaloChat-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

@@ -14,11 +14,11 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React"
 
-@interface halochatTests : XCTestCase
+@interface HaloChatTests : XCTestCase
 
 @end
 
-@implementation halochatTests
+@implementation HaloChatTests
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL(^)(UIView *view))test
 {

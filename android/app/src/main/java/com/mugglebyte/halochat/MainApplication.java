@@ -1,4 +1,4 @@
-package com.halochat;
+package com.mugglebyte.halochat;
 
 import android.app.Application;
 import android.content.Context;
