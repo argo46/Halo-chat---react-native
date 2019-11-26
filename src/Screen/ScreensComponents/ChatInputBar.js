@@ -1,9 +1,34 @@
-import React from 'react';
-import {View, Text, StyleSheet, TextInput} from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
+import database from '@react-native-firebase/database';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import firestore from '@react-native-firebase/firestore';
+
 import {colors} from '../../assets/colors';
 
 const ChatInputBar = () => {
+  const [text, setText] = useState('');
+
+  const textOnChange = text => {
+    setText(text);
+  };
+
+  const onSendPress = async () => {
+    const ref = firestore().collection(`messages`);
+    setText('');
+    await ref.add({
+      name: 'New User',
+      text,
+      created: firestore.FieldValue.serverTimestamp(),
+    });
+  };
+
   return (
     <View style={style.rootView}>
       <Icon
@@ -12,10 +37,16 @@ const ChatInputBar = () => {
         color="grey"
         style={style.plusIcon}
       />
-      <TextInput style={style.textInput} />
-      <View style={style.sendContainer}>
+      <TextInput
+        style={style.textInput}
+        onChangeText={text => textOnChange(text)}
+        value={text}
+      />
+      <TouchableOpacity
+        style={style.sendContainer}
+        onPress={() => onSendPress()}>
         <Icon size={25} name="send" color="white" />
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };

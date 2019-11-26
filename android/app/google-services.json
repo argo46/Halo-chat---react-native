@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "422052845189",
+    "firebase_url": "https://halo-chat-cf85d.firebaseio.com",
+    "project_id": "halo-chat-cf85d",
+    "storage_bucket": "halo-chat-cf85d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:422052845189:android:b632c82e1aa850673e3bec",
+        "android_client_info": {
+          "package_name": "com.mugglebyte.halochat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "422052845189-ibasdjp5inmaek4s05jgkdu5ac7sq35g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mugglebyte.halochat",
+            "certificate_hash": "3a5ede67c109aa917d85032e4600d996ae399242"
+          }
+        },
+        {
+          "client_id": "422052845189-f2fca2b0athc0vooa0f5jp3jcrj2e8ou.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBx1ibQapADQ1QSH2gOecu_LvdBD34CE10"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "422052845189-f2fca2b0athc0vooa0f5jp3jcrj2e8ou.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

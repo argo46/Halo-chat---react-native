@@ -8,6 +8,8 @@ import {colors} from './src/assets/colors';
 import TabNav from './src/Screen/tabs';
 import ChatRoomScreen from './src/Screen/ChatRoomScreen';
 import ChatsScreen from './src/Screen/ChatsScreen';
+import RegisterScreen from './src/Screen/RegisterScreen';
+import LoginScreen from './src/Screen/LoginScreen';
 
 export default class App extends Component {
   render() {
@@ -28,9 +30,11 @@ const AppNavigator = createStackNavigator(
     TabNav,
     ChatRoomScreen,
     ChatsScreen,
+    RegisterScreen,
+    LoginScreen,
   },
   {
-    initialRouteName: 'TabNav',
+    initialRouteName: 'LoginScreen',
     defaultNavigationOptions: {
       title: 'Halo Chat',
       headerStyle: {
