@@ -7,6 +7,7 @@ import ChatBubbleIncoming from './ScreensComponents/ChatBubbleIncoming';
 import ChatBubbleOut from './ScreensComponents/ChatBubbleOut';
 
 import firestore from '@react-native-firebase/firestore';
+import {firebase} from '@react-native-firebase/auth';
 
 export default class ChatRoomcreen extends Component {
   constructor(props) {
@@ -21,19 +22,48 @@ export default class ChatRoomcreen extends Component {
     };
   };
 
-  componentDidMount() {
+  goToLogin = () => {
+    this.props.navigation.navigate('LoginScreen');
+  };
+
+  async componentDidMount() {
     const name = this.props.navigation.getParam('name', 'ChatRoom');
     this.props.navigation.setParams({name});
 
     const unsubscribe = firestore()
+      .collection('chat_rooms')
+      .doc(this.props.navigation.getParam('chatroomId', ''))
       .collection('messages')
       .orderBy('created', 'desc')
       // .limit(5)
       .onSnapshot(querySnapshot => {
-        console.log('Total users', querySnapshot.size);
-        console.log('User Documents', querySnapshot.docs);
+        // console.log('Total users', querySnapshot.size);
+        // console.log('User Documents', querySnapshot.docs);
         this.setState({messages: querySnapshot.docs});
       });
+
+    // const update = {
+    //   displayName: 'Bodo',
+    // };
+
+    // await firebase
+    //   .auth()
+    //   .currentUser.updateProfile(update)
+    //   .then(() => {
+    //     const user = firebase.auth().currentUser;
+
+    //     if (user) {
+    //       console.log(user);
+    //     }
+    //   });
+
+    // firebase
+    //   .auth()
+    //   .signOut()
+    //   .then(() => this.goToLogin())
+    //   .catch(function(error) {
+    //     console.log(error);
+    //   });
   }
   render() {
     return (
@@ -43,7 +73,12 @@ export default class ChatRoomcreen extends Component {
             inverted
             data={this.state.messages}
             renderItem={({item}) => {
-              if (item._data.name === 'New User') {
+              console.log(item);
+              console.log(this.props.navigation.getParam('currentId', ''));
+              if (
+                item._data.sender_id ===
+                this.props.navigation.getParam('currentId', '')
+              ) {
                 return <ChatBubbleOut message={item._data.text} />;
               } else {
                 return <ChatBubbleIncoming message={item._data.text} />;
@@ -52,7 +87,10 @@ export default class ChatRoomcreen extends Component {
             keyExtractor={item => item.id}
           />
         </View>
-        <ChatInputBar />
+        <ChatInputBar
+          chatroomId={this.props.navigation.getParam('chatroomId', '')}
+          senderId={this.props.navigation.getParam('currentId', '')}
+        />
       </View>
     );
   }

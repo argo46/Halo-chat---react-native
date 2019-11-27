@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -12,14 +12,25 @@ import {colors} from '../assets/colors';
 import {Input, Button} from 'native-base';
 import auth from '@react-native-firebase/auth';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import {firebase} from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
-const LoginScreen = () => {
+const LoginScreen = props => {
   const onLoginPressed = async () => {
     auth()
       .signInWithEmailAndPassword(email, password)
-      .then(result => console.log(result))
+      .then(props.navigation.navigate('TabNav'))
       .catch(err => console.log(err));
   };
+
+  useEffect(() => {
+    // Update the document title using the browser API
+    const user = firebase.auth().currentUser;
+
+    if (user) {
+      props.navigation.navigate('TabNav');
+    }
+  });
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -48,12 +59,12 @@ const LoginScreen = () => {
             secureTextEntry={isHide}
           />
           {isHide ? (
-            <TouchableOpacity onPress={() => setHide(false)}>
-              <Icon size={20} name="eye" color={colors.primaryLight} />
+            <TouchableOpacity onPress={() => setHide(!isHide)}>
+              <Icon size={20} name="eye-slash" color={colors.inactive} />
             </TouchableOpacity>
           ) : (
-            <TouchableOpacity onPress={() => setHide(true)}>
-              <Icon size={20} name="eye-slash" color={colors.inactive} />
+            <TouchableOpacity onPress={() => setHide(!isHide)}>
+              <Icon size={20} name="eye" color={colors.primaryLight} />
             </TouchableOpacity>
           )}
         </View>

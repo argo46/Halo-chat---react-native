@@ -55,12 +55,12 @@ const RegisterScreen = () => {
             secureTextEntry={isHide}
           />
           {isHide ? (
-            <TouchableOpacity onPress={() => setHide(false)}>
-              <Icon size={20} name="eye" color={colors.primaryLight} />
+            <TouchableOpacity onPress={() => setHide(!isHide)}>
+              <Icon size={20} name="eye-slash" color={colors.inactive} />
             </TouchableOpacity>
           ) : (
-            <TouchableOpacity onPress={() => setHide(true)}>
-              <Icon size={20} name="eye-slash" color={colors.inactive} />
+            <TouchableOpacity onPress={() => setHide(!isHide)}>
+              <Icon size={20} name="eye" color={colors.primaryLight} />
             </TouchableOpacity>
           )}
         </View>

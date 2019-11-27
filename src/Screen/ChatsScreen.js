@@ -3,11 +3,21 @@ import {Text, View, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
 
 import ChatBar from './ScreensComponents/ChatBar';
 import {List} from 'native-base';
+import {firebase} from '@react-native-firebase/auth';
+import auth from '@react-native-firebase/auth';
 
 export default class ChatsScreen extends Component {
   static navigationOptions = {
     title: 'Chats',
   };
+
+  async componentDidMount() {
+    const user = auth().currentUser;
+
+    if (user) {
+      console.log(user);
+    }
+  }
   render() {
     return (
       <View style={style.rootView}>

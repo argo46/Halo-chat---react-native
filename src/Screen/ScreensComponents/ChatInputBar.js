@@ -12,7 +12,7 @@ import firestore from '@react-native-firebase/firestore';
 
 import {colors} from '../../assets/colors';
 
-const ChatInputBar = () => {
+const ChatInputBar = props => {
   const [text, setText] = useState('');
 
   const textOnChange = text => {
@@ -20,10 +20,13 @@ const ChatInputBar = () => {
   };
 
   const onSendPress = async () => {
-    const ref = firestore().collection(`messages`);
+    const ref = firestore()
+      .collection('chat_rooms')
+      .doc(props.chatroomId)
+      .collection('messages');
     setText('');
     await ref.add({
-      name: 'New User',
+      sender_id: props.senderId,
       text,
       created: firestore.FieldValue.serverTimestamp(),
     });
