@@ -36,7 +36,6 @@ export default class ContactsScreen extends Component {
         );
         this.setState({friendList: friendListTemp, currentUser: user.uid});
       });
-    console.log(this.state.friendList);
   }
   render() {
     return (

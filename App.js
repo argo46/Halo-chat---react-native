@@ -49,7 +49,7 @@ const AppNavigator = createStackNavigator(
     UserDetailProfile,
   },
   {
-    initialRouteName: 'TabNav',
+    initialRouteName: 'SplashScreen',
     defaultNavigationOptions: {
       title: 'Halo Chat',
       headerStyle: {

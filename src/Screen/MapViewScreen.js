@@ -9,85 +9,60 @@ import {
   Text,
 } from 'react-native';
 import MapView, {Marker, AnimatedRegion} from 'react-native-maps';
-import Geolocation from 'react-native-geolocation-service';
+import firestore from '@react-native-firebase/firestore';
 
-const {width, height} = Dimensions.get('window');
-const ASPECT_RATIO = width / height;
-const LATITUDE = 37.78825;
-const LONGITUDE = -122.4324;
-const LATITUDE_DELTA = 0.0922;
-const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+let unsubscribe = '';
 
 export default class MapViewScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      latitude: LATITUDE,
-      longitude: LONGITUDE,
-      coordinate: new AnimatedRegion({
-        latitude: LATITUDE,
-        longitude: LONGITUDE,
-        latitudeDelta: 0,
-        longitudeDelta: 0,
-      }),
-      position: {
-        coords: {
-          latitude: -6.6205026,
-          longitude: 106.8185424,
-        },
-      },
+      latitude: -0.789275,
+      longitude: 113.921327,
+      latitudeInit: -0.789275,
+      longitudeInit: 113.921327,
+      isInit: false,
+      isLive: true,
     };
   }
 
   componentDidMount() {
-    // Geolocation.getCurrentPosition(
-    //   position => {
-    //     console.log(position);
-    //     this.setState({position});
-    //   },
-    //   error => {
-    //     // See error code charts below.
-    //     console.log(error.code, error.message);
-    //   },
-    //   {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
-    // );
-
-    this.watchId = Geolocation.watchPosition(
-      position => {
-        const {latitude, longitude} = position.coords;
-
-        const newCoordinate = {
-          latitude,
-          longitude,
-        };
-        // console.log(newCoordinate);
-        // this.setState({position});
+    const ref = this.props.navigation.getParam('ref', '');
+    ref.onSnapshot(querySnapshot => {
+      console.log(querySnapshot);
+      // console.log('Total users', querySnapshot.size);
+      // console.log('User Documents', querySnapshot);
+      if (!this.state.isInit) {
+        this.setState({
+          latitudeInit: querySnapshot._data.live_location.latitude,
+          longitudeInit: querySnapshot._data.live_location.longitude,
+          latitude: querySnapshot._data.live_location.latitude,
+          longitude: querySnapshot._data.live_location.longitude,
+          isLive: querySnapshot._data.live_location.isLive,
+          isInit: true,
+        });
+      } else {
         if (Platform.OS === 'android') {
           if (this.marker) {
             this.marker._component.animateMarkerToCoordinate(
-              newCoordinate,
+              {
+                latitude: querySnapshot._data.live_location.latitude,
+                longitude: querySnapshot._data.live_location.longitude,
+              },
               1500,
-            ); // 500 is the duration to animate the marker
+            );
           }
         }
-      },
-      error => {
-        // See error code charts below.
-        console.log(error.code, error.message);
-      },
-      {
-        enableHighAccuracy: true,
-        timeout: 15000,
-        maximumAge: 10000,
-        distanceFilter: 0,
-        FastestInterval: 500,
-      },
-    );
+        this.setState({
+          latitude: querySnapshot._data.live_location.latitude,
+          longitude: querySnapshot._data.live_location.longitude,
+          isLive: querySnapshot._data.live_location.isLive,
+          isInit: false,
+        });
+      }
+      this.unsubscribe = unsubscribe;
+    });
   }
-  componentWillUnmount() {
-    Geolocation.clearWatch(this.watchId);
-  }
-
   render() {
     return (
       <View style={{...StyleSheet.absoluteFillObject}}>
@@ -97,8 +72,8 @@ export default class MapViewScreen extends Component {
           followUserLocation
           loadingEnabled
           region={{
-            latitude: this.state.position.coords.latitude,
-            longitude: this.state.position.coords.longitude,
+            latitude: this.state.latitudeInit,
+            longitude: this.state.longitudeInit,
             latitudeDelta: 0.005,
             longitudeDelta: 0.005,
           }}
@@ -108,8 +83,8 @@ export default class MapViewScreen extends Component {
               this.marker = marker;
             }}
             coordinate={{
-              latitude: this.state.position.coords.latitude,
-              longitude: this.state.position.coords.longitude,
+              latitude: this.state.latitudeInit,
+              longitude: this.state.longitudeInit,
               latitudeDelta: 0,
               longitudeDelta: 0,
             }}

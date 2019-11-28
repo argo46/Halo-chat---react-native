@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
 import {Text, View, StyleSheet, ScrollView, FlatList} from 'react-native';
-
+import {Button} from 'native-base';
 import {colors} from '../assets/colors/';
 import ChatInputBar from './ScreensComponents/ChatInputBar';
 import ChatBubbleIncoming from './ScreensComponents/ChatBubbleIncoming';
 import ChatBubbleOut from './ScreensComponents/ChatBubbleOut';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import firestore from '@react-native-firebase/firestore';
 import {firebase} from '@react-native-firebase/auth';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 export default class ChatRoomcreen extends Component {
   constructor(props) {
@@ -100,6 +102,7 @@ export default class ChatRoomcreen extends Component {
           chatroomId={this.props.navigation.getParam('chatroomId', '')}
           senderId={this.props.navigation.getParam('currentId', '')}
           tags={this.props.navigation.getParam('tags', '')}
+          navigation={this.props.navigation}
         />
       </View>
     );

@@ -8,4 +8,7 @@ export const colors = {
   secondaryDark: '#c76944',
   inactive: '#BDBDBD',
   backgroundBlue: '#AAD0D9',
+  veryLightgrey: '#f0f0f0',
+  danger: '#e86658',
+  dangerVeryLight: '#f8d1cd',
 };
