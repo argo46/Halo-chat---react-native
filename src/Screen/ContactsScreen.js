@@ -54,6 +54,7 @@ export default class ContactsScreen extends Component {
                     name: item._data.name,
                     chatroomId: idArray[0] + idArray[1],
                     currentId: this.state.currentUser,
+                    tags: idArray,
                   });
                 }}>
                 <ChatBar

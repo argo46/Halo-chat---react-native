@@ -12,10 +12,21 @@ import {colors} from '../assets/colors';
 import {Input, Button} from 'native-base';
 import auth from '@react-native-firebase/auth';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import firestore from '@react-native-firebase/firestore';
 
-const RegisterScreen = () => {
+const RegisterScreen = props => {
   const onRegisterPressed = async () => {
-    auth().createUserWithEmailAndPassword(email, password, name);
+    auth()
+      .createUserWithEmailAndPassword(email, password, name)
+      .then(result => {
+        firestore()
+          .collection('users')
+          .doc(result.user.uid)
+          .set({name})
+          .then(() => {
+            props.navigation.navigate('TabNav');
+          });
+      });
   };
 
   const [email, setEmail] = useState('');

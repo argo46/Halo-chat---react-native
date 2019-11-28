@@ -1,12 +1,5 @@
 import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native';
-import database from '@react-native-firebase/database';
+import {View, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import firestore from '@react-native-firebase/firestore';
 
@@ -15,20 +8,30 @@ import {colors} from '../../assets/colors';
 const ChatInputBar = props => {
   const [text, setText] = useState('');
 
-  const textOnChange = text => {
-    setText(text);
+  const textOnChange = value => {
+    setText(value);
   };
 
-  const onSendPress = async () => {
-    const ref = firestore()
-      .collection('chat_rooms')
-      .doc(props.chatroomId)
-      .collection('messages');
-    setText('');
-    await ref.add({
+  const ref = firestore()
+    .collection('chat_rooms')
+    .doc(props.chatroomId);
+  const sendText = () => {
+    ref.collection('messages').add({
       sender_id: props.senderId,
       text,
       created: firestore.FieldValue.serverTimestamp(),
+    });
+  };
+  const onSendPress = () => {
+    setText('');
+    ref.get().then(dataSnapshot => {
+      if (!dataSnapshot.exists) {
+        ref.set({tags: props.tags}).then(() => {
+          sendText();
+        });
+      } else {
+        sendText();
+      }
     });
   };
 

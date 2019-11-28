@@ -39,6 +39,7 @@ export default class ChatRoomcreen extends Component {
       .orderBy('created', 'desc')
       // .limit(5)
       .onSnapshot(querySnapshot => {
+        console.log(querySnapshot);
         // console.log('Total users', querySnapshot.size);
         // console.log('User Documents', querySnapshot.docs);
         this.setState({messages: querySnapshot.docs});
@@ -98,6 +99,7 @@ export default class ChatRoomcreen extends Component {
         <ChatInputBar
           chatroomId={this.props.navigation.getParam('chatroomId', '')}
           senderId={this.props.navigation.getParam('currentId', '')}
+          tags={this.props.navigation.getParam('tags', '')}
         />
       </View>
     );

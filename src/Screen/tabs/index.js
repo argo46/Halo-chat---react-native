@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import ChatsScreen from '../ChatsScreen';
 import ContactsScreen from '../ContactsScreen';
 import SettingsScreen from '../SettingsScreen';
+import UserDetailScreen from '../UserDetailScreen';
 
 import {colors} from '../../assets/colors';
 
@@ -31,11 +32,11 @@ export default createBottomTabNavigator(
       },
     },
     Settings: {
-      screen: SettingsScreen,
+      screen: UserDetailScreen,
       navigationOptions: {
-        title: 'More',
+        title: 'Profile',
         tabBarIcon: ({tintColor}) => (
-          <Icon size={20} name="ellipsis-h" color={tintColor} />
+          <Icon size={20} name="user" solid color={tintColor} />
         ),
       },
     },

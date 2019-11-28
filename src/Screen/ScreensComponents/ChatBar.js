@@ -12,13 +12,21 @@ const ChatBar = props => {
         <Thumbnail source={{uri: props.imageUrl}} />
         <View style={style.middleView}>
           <Text style={style.nameText}>{props.name}</Text>
-          <Text style={style.longText}>{props.text}</Text>
+          {props.text ? (
+            <Text style={style.longText}>{props.text}</Text>
+          ) : (
+            <></>
+          )}
         </View>
         <View style={style.rightView}>
           <Text style={style.dateText}>{props.date}</Text>
         </View>
       </View>
-      <View style={style.divider} />
+      {props.divider ? (
+        <View style={style.divider} />
+      ) : (
+        <View style={style.noDivider} />
+      )}
     </View>
   );
 };
@@ -36,15 +44,22 @@ const style = StyleSheet.create({
     width: '100%',
     marginVertical: 10,
   },
+  noDivider: {
+    height: 1,
+    // backgroundColor: colors.inactive,
+    width: '100%',
+    marginVertical: 10,
+  },
   rootView: {
     display: 'flex',
     flexDirection: 'row',
   },
   middleView: {
-    marginLeft: 10,
+    marginLeft: 15,
     display: 'flex',
     flex: 1,
     flexDirection: 'column',
+    justifyContent: 'center',
   },
   nameText: {
     fontWeight: 'bold',

@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import {Text, View, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
 
 import ChatBar from './ScreensComponents/ChatBar';
-import {List} from 'native-base';
-import {firebase} from '@react-native-firebase/auth';
 import auth from '@react-native-firebase/auth';
 
 export default class ChatsScreen extends Component {
@@ -25,16 +23,25 @@ export default class ChatsScreen extends Component {
           data={DATA}
           renderItem={({item}) => (
             <TouchableOpacity
-              onPress={() =>
-                this.props.navigation.navigate('ChatRoomScreen', {
-                  name: item.name,
-                })
+              onPress={
+                () => {
+                  auth()
+                    .signOut()
+                    .then(() => this.props.navigation.navigate('LoginScreen'))
+                    .catch(function(error) {
+                      console.log(error);
+                    });
+                }
+                // this.props.navigation.navigate('ChatRoomScreen', {
+                //   name: item.name,
+                // })
               }>
               <ChatBar
                 imageUrl={item.imageUrl}
                 name={item.name}
                 text={item.text}
                 date={item.date}
+                divider={true}
               />
             </TouchableOpacity>
           )}
