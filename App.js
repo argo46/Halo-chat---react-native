@@ -5,13 +5,23 @@ import {StatusBar} from 'react-native';
 
 import {colors} from './src/assets/colors';
 
+import firestore from '@react-native-firebase/firestore';
+
 import TabNav from './src/Screen/tabs';
 import ChatRoomScreen from './src/Screen/ChatRoomScreen';
 import ChatsScreen from './src/Screen/ChatsScreen';
 import RegisterScreen from './src/Screen/RegisterScreen';
 import LoginScreen from './src/Screen/LoginScreen';
+import MapViewScreen from './src/Screen/MapViewScreen';
 
 export default class App extends Component {
+  componentDidMount() {
+    async function bootstrap() {
+      await firestore().settings({
+        cacheSizeBytes: firestore.CACHE_SIZE_UNLIMITED, // unlimited cache size
+      });
+    }
+  }
   render() {
     return (
       <>
@@ -32,9 +42,10 @@ const AppNavigator = createStackNavigator(
     ChatsScreen,
     RegisterScreen,
     LoginScreen,
+    MapViewScreen,
   },
   {
-    initialRouteName: 'LoginScreen',
+    initialRouteName: 'MapViewScreen',
     defaultNavigationOptions: {
       title: 'Halo Chat',
       headerStyle: {

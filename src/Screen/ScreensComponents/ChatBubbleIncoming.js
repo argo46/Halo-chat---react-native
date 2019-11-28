@@ -22,7 +22,8 @@ const style = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 7,
     borderRadius: 24,
-    marginHorizontal: 10,
+    // marginHorizontal: 10,
+    maxWidth: '90%',
     marginVertical: 3,
   },
 });

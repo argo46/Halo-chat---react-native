@@ -26,6 +26,8 @@ export default class ChatRoomcreen extends Component {
     this.props.navigation.navigate('LoginScreen');
   };
 
+  unsubscribe = () => {};
+
   async componentDidMount() {
     const name = this.props.navigation.getParam('name', 'ChatRoom');
     this.props.navigation.setParams({name});
@@ -40,6 +42,7 @@ export default class ChatRoomcreen extends Component {
         // console.log('Total users', querySnapshot.size);
         // console.log('User Documents', querySnapshot.docs);
         this.setState({messages: querySnapshot.docs});
+        this.unsubscribe = unsubscribe;
       });
 
     // const update = {
@@ -65,11 +68,16 @@ export default class ChatRoomcreen extends Component {
     //     console.log(error);
     //   });
   }
+
+  componentWillUnmount() {
+    // this.unsubscribe();
+  }
   render() {
     return (
       <View style={style.rootView}>
         <View style={style.chatsContainer}>
           <FlatList
+            contentContainerStyle={style.flatList}
             inverted
             data={this.state.messages}
             renderItem={({item}) => {
@@ -107,5 +115,6 @@ const style = StyleSheet.create({
     marginBottom: 60,
     display: 'flex',
     flexDirection: 'column',
+    marginHorizontal: 10,
   },
 });
