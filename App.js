@@ -13,6 +13,8 @@ import ChatsScreen from './src/Screen/ChatsScreen';
 import RegisterScreen from './src/Screen/RegisterScreen';
 import LoginScreen from './src/Screen/LoginScreen';
 import MapViewScreen from './src/Screen/MapViewScreen';
+import SplashScreen from './src/Screen/SplashScreen';
+import UserDetailProfile from './src/Screen/UserDetailScreen';
 
 export default class App extends Component {
   componentDidMount() {
@@ -43,9 +45,11 @@ const AppNavigator = createStackNavigator(
     RegisterScreen,
     LoginScreen,
     MapViewScreen,
+    SplashScreen,
+    UserDetailProfile,
   },
   {
-    initialRouteName: 'MapViewScreen',
+    initialRouteName: 'TabNav',
     defaultNavigationOptions: {
       title: 'Halo Chat',
       headerStyle: {
