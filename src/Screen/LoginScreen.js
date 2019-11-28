@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -12,8 +12,6 @@ import {colors} from '../assets/colors';
 import {Input, Button} from 'native-base';
 import auth from '@react-native-firebase/auth';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import {firebase} from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
 
 const LoginScreen = props => {
   const onLoginPressed = async () => {
@@ -22,15 +20,6 @@ const LoginScreen = props => {
       .then(props.navigation.navigate('TabNav'))
       .catch(err => console.log(err));
   };
-
-  useEffect(() => {
-    // Update the document title using the browser API
-    const user = firebase.auth().currentUser;
-
-    if (user) {
-      props.navigation.navigate('TabNav');
-    }
-  });
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
