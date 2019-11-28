@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {colors} from '../assets/colors';
-import {Input, Button} from 'native-base';
+import {Input, Button, Row} from 'native-base';
 import auth from '@react-native-firebase/auth';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
@@ -61,6 +61,13 @@ const LoginScreen = props => {
       <Button onPress={() => onLoginPressed()} style={style.button}>
         <Text style={style.registerText}>LOGIN</Text>
       </Button>
+      <View style={style.textInfoContainer}>
+        <Text style={style.accountInfo}>Don't have an account yet? </Text>
+        <TouchableOpacity
+          onPress={() => props.navigation.navigate('RegisterScreen')}>
+          <Text style={style.linkText}>Register Here!</Text>
+        </TouchableOpacity>
+      </View>
     </ScrollView>
   );
 };
@@ -102,6 +109,21 @@ const style = StyleSheet.create({
   registerText: {
     fontSize: 18,
     color: '#fff',
+  },
+  textInfoContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 30,
+    justifyContent: 'center',
+  },
+  accountInfo: {
+    fontSize: 14,
+  },
+  linkText: {
+    fontSize: 14,
+    color: colors.primaryLight,
+    fontWeight: 'bold',
   },
 });
 

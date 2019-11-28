@@ -79,6 +79,13 @@ const RegisterScreen = props => {
       <Button onPress={() => onRegisterPressed()} style={style.button}>
         <Text style={style.registerText}>REGISTER</Text>
       </Button>
+      <View style={style.textInfoContainer}>
+        <Text style={style.accountInfo}>Already have an account? </Text>
+        <TouchableOpacity
+          onPress={() => props.navigation.navigate('LoginScreen')}>
+          <Text style={style.linkText}>Login Here!</Text>
+        </TouchableOpacity>
+      </View>
     </ScrollView>
   );
 };
@@ -120,6 +127,21 @@ const style = StyleSheet.create({
   registerText: {
     fontSize: 18,
     color: '#fff',
+  },
+  textInfoContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 30,
+    justifyContent: 'center',
+  },
+  accountInfo: {
+    fontSize: 14,
+  },
+  linkText: {
+    fontSize: 14,
+    color: colors.primaryLight,
+    fontWeight: 'bold',
   },
 });
 
