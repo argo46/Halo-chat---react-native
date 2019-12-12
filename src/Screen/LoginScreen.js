@@ -15,9 +15,9 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 
 const LoginScreen = props => {
   const onLoginPressed = async () => {
-    auth()
+    await auth()
       .signInWithEmailAndPassword(email, password)
-      .then(props.navigation.navigate('TabNav'))
+      .then(() => props.navigation.navigate('TabNav'))
       .catch(err => console.log(err));
   };
 

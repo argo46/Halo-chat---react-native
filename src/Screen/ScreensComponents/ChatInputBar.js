@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   StyleSheet,
@@ -25,6 +25,21 @@ const ChatInputBar = props => {
     setText(value);
   };
 
+  useEffect(() => {
+    const unsubscribe = ref.onSnapshot(dataSnapshot => {
+      if (
+        dataSnapshot.exists &&
+        dataSnapshot._data.live_location &&
+        dataSnapshot._data.live_location.isLive
+      ) {
+        setShare(true);
+      } else {
+        setShare(false);
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+
   const onMapPress = () => {
     Alert.alert(
       'Confirmation',
@@ -44,12 +59,12 @@ const ChatInputBar = props => {
   };
 
   const shareLocation = () => {
-    setShare(true);
+    // setShare(true);
     setWatchId(shareLiveLocation(ref));
   };
 
   const stopShareLocation = () => {
-    setShare(false);
+    // setShare(false);
     stopShareLiveLocation(watchId, ref);
     console.log(watchId);
   };
@@ -67,13 +82,15 @@ const ChatInputBar = props => {
   const onSendPress = () => {
     setText('');
     ref.get().then(dataSnapshot => {
-      if (!dataSnapshot.exists) {
-        ref.set({tags: props.tags}).then(() => {
-          sendText();
-        });
-      } else {
+      console.log('object');
+      console.log(dataSnapshot);
+      // if (!(dataSnapshot._data.tags === true)) {
+      ref.set({tags: props.tags}).then(() => {
         sendText();
-      }
+      });
+      // } else {
+      // sendText();
+      // }
     });
   };
 

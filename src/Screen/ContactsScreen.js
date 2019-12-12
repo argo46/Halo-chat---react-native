@@ -57,7 +57,10 @@ export default class ContactsScreen extends Component {
                   });
                 }}>
                 <ChatBar
-                  imageUrl={'https://randomuser.me/api/portraits/men/74.jpg'}
+                  imageUrl={
+                    'https://i.pravatar.cc/100?img=' +
+                    parseInt(Math.random() * 70)
+                  }
                   name={item._data.name}
                 />
               </TouchableOpacity>

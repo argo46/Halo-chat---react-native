@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {createAppContainer} from 'react-navigation';
+import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {StatusBar} from 'react-native';
 
@@ -37,19 +37,16 @@ export default class App extends Component {
   }
 }
 
-const AppNavigator = createStackNavigator(
+const AppStack = createStackNavigator(
   {
     TabNav,
     ChatRoomScreen,
     ChatsScreen,
-    RegisterScreen,
-    LoginScreen,
     MapViewScreen,
-    SplashScreen,
     UserDetailProfile,
   },
   {
-    initialRouteName: 'SplashScreen',
+    initialRouteName: 'TabNav',
     defaultNavigationOptions: {
       title: 'Halo Chat',
       headerStyle: {
@@ -63,4 +60,17 @@ const AppNavigator = createStackNavigator(
   },
 );
 
-const AppContainer = createAppContainer(AppNavigator);
+const AuthStack = createStackNavigator({LoginScreen, RegisterScreen});
+
+const AppContainer = createAppContainer(
+  createSwitchNavigator(
+    {
+      SplashScreen,
+      AppStack,
+      AuthStack,
+    },
+    {
+      initialRouteName: 'SplashScreen',
+    },
+  ),
+);

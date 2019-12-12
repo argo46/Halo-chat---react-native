@@ -6,17 +6,20 @@ import {firebase} from '@react-native-firebase/auth';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import auth from '@react-native-firebase/auth';
 
-const UserDetailScreen = () => {
+const UserDetailScreen = props => {
   useEffect(() => {
     // Update the document title using the browser API
     const user = firebase.auth().currentUser;
     console.log(user);
   });
 
-  const onLogoutPress = () => {
-    auth()
+  const onLogoutPress = async () => {
+    await auth()
       .signOut()
-      .then(() => this.props.navigation.navigate('LoginScreen'))
+      .then(() => {
+        props.navigation.navigate('LoginScreen');
+        // console.log(res);
+      })
       .catch(function(error) {
         console.log(error);
       });

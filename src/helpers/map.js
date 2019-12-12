@@ -11,7 +11,7 @@ export const shareLiveLocation = ref => {
         longitude,
       };
 
-      ref.set({live_location});
+      ref.update({live_location});
     },
     error => {
       // See error code charts below.
@@ -36,6 +36,6 @@ export const stopShareLiveLocation = (watchId, ref) => {
     longitude: 0,
   };
 
-  ref.set({live_location});
+  ref.update({live_location});
   console.log('okay');
 };

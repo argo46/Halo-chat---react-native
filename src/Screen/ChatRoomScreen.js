@@ -41,9 +41,10 @@ export default class ChatRoomcreen extends Component {
       .orderBy('created', 'desc')
       // .limit(5)
       .onSnapshot(querySnapshot => {
-        console.log(querySnapshot);
+        // console.log(querySnapshot);
         // console.log('Total users', querySnapshot.size);
         // console.log('User Documents', querySnapshot.docs);
+
         this.setState({messages: querySnapshot.docs});
         this.unsubscribe = unsubscribe;
       });
@@ -84,8 +85,7 @@ export default class ChatRoomcreen extends Component {
             inverted
             data={this.state.messages}
             renderItem={({item}) => {
-              console.log(item);
-              console.log(this.props.navigation.getParam('currentId', ''));
+              // console.log(this.props.navigation.getParam('currentId', ''));
               if (
                 item._data.sender_id ===
                 this.props.navigation.getParam('currentId', '')

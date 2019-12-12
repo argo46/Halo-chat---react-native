@@ -8,9 +8,9 @@ const SplashScreen = props => {
     const user = firebase.auth().currentUser;
 
     if (user) {
-      props.navigation.navigate('TabNav');
+      props.navigation.navigate('AppStack');
     } else {
-      props.navigation.navigate('LoginScreen');
+      props.navigation.navigate('AuthStack');
     }
   });
 
