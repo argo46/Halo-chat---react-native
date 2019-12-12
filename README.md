@@ -58,5 +58,8 @@ $ react-native run-android
 ---
 
 ## Screenshots
+<img src="https://raw.githubusercontent.com/argo46/Halo-chat---react-native/master/screenshots/LoginHaloChat.png" width="200">    <img src="https://raw.githubusercontent.com/argo46/Halo-chat---react-native/master/screenshots/ChatHistory%20HaloChat.png" width="200">    <img src="https://raw.githubusercontent.com/argo46/Halo-chat---react-native/master/screenshots/Chat%20room%20HaloChat.png" width="200">  <img src="https://raw.githubusercontent.com/argo46/Halo-chat---react-native/master/screenshots/HaloChat%20Profile.png" width="200">
+
+<img src="https://raw.githubusercontent.com/argo46/Halo-chat---react-native/master/screenshots/Contacts%20HaloChat.png" width="200">    <img src="https://raw.githubusercontent.com/argo46/Halo-chat---react-native/master/screenshots/Map%20HaloChat.png" width="200">
 
 ---
